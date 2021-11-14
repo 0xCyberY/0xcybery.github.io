@@ -1,0 +1,31 @@
+- name: Networking
+  percentage: 65
+  color: secondary
+
+- name: Windows & Linux Security
+  percentage: 88
+  color: success
+
+- name: Check Point CCSA
+  percentage: 85
+  color: danger
+
+- name: Wireshark
+  percentage: 90
+  color: warning
+
+- name: SIEM 
+  percentage: 75
+  color: info
+
+- name: Ethical Hacking 
+  percentage: 95
+  color: light
+
+- name: Cloud Security and Analytics 
+  percentage: 70
+  color: 
+
+- name: Cyber Forensics 
+  percentage: 80
+  color: secondary

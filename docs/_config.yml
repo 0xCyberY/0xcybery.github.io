@@ -1,0 +1,97 @@
+### Site Settings ###
+title               : CyberY
+description         : >-
+                      I'm hacking things legally. And report the weakness to prevent you from being compromised.
+
+baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
+repository          : YoussefRaafatNasry/portfolYOU     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
+remote_theme        : YoussefRaafatNasry/portfolYOU
+open_new_tab        : false                             # Opens external URLs in new tab (works for posts, projects and navbar only)
+
+
+### Plugins ###
+plugins:
+  - jemoji
+
+
+### Navbar Settings ###
+nav_exclude:                                            # The following paths are excluded from navbar
+  - pages/tags.html
+  - pages/404.html
+  - pages/index.md
+  - documentation/*                           # For Documentation Only
+
+
+### Author Info ###
+author:
+  name              : Abdullah Baghuth
+  image             : https://pbs.twimg.com/profile_images/1232393141514145792/Bj_tTUlM_400x400.jpg
+# behance           : your_username
+# dribbble          : your_username
+  email             : abdullahsalem7737@gmail.com
+  facebook          : https://www.facebook.com/abdullah.salem.baghuth
+  github            : https://github.com/0xCyberY
+# gitlab            : your_username
+# instagram         : your_username
+# kaggle            : your_username
+  linkedin          : https://www.linkedin.com/in/abdullah-baghuth-934303107/
+  medium            : https://abdullahbaghuth.medium.com/
+# soundcloud        : your_username
+# spotify           : your_username
+# stackoverflow     : your_user_id
+# tumblr            : your_username.tumblr.com
+# twitch            : your_username
+  twitter           : https://twitter.com/0xCyberY
+# vimeo             : your_username
+# youtube           : your_channel_name
+ 
+### Posts ###
+permalink: /blog/:title
+
+
+### Collections ###
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name
+  elements:                                             # For Documentation Only
+    output: true                                        # For Documentation Only
+
+
+### Disqus ###
+disqus:
+  shortname: your-short-name-disqus                     # Your website Shortname on disqus
+
+
+### Analytics ###
+analytics:
+  enabled: false                                        # Set true to enable analytics
+  google:
+    tracking_id: your-google-tracking-id
+
+
+### Defaults for collections ###
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: "page"
+  - scope:                                              # For Documentation Only
+      path: ""                                          # For Documentation Only
+      type: "elements"                                  # For Documentation Only
+    values:                                             # For Documentation Only
+      layout: "element"                                 # For Documentation Only
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      comments: false                                   # Set to true to enable disqus comments
+
+
+### Exclude from processing ###
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - LICENSE
+  - "*.log"
