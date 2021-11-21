@@ -7,7 +7,7 @@ description: Prevent Attack Using IPS Blade Protection
 ---
 This article comes as a solution to avoid bypassing the IPS blade in Check Point Firewall.
 
-If you don't read Bypass IPS in Check Point Firewall, Please go and read it first.
+If you don't read [Bypass IPS in Check Point Firewall](https://0xcybery.github.io/blog/bypassIPS), Please go and read it first.
 
 ## Reflected XSS
 
