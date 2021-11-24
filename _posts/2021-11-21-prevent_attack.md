@@ -9,6 +9,8 @@ This article comes as a solution to avoid bypassing the IPS blade in Check Point
 
 If you don't read [Bypass IPS in Check Point Firewall](https://0xcybery.github.io/blog/bypassIPS), Please go and read it first.
 
+![0](../assets/img/prevent_attack/00.png)
+
 ## Reflected XSS
 
 In the previse attack we were able to bypass IPS Blade with strict mode using the following payload 
