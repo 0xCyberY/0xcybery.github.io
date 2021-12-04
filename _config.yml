@@ -1,7 +1,8 @@
 ### Site Settings ###
 title               : CyberY
 description         : >-
-                      I'm hacking things legally. And report the weakness to prevent you from being compromised.
+                      I write code that breaks codes with :coffee:
+                      Cyber Security | #PenTest #RedTeam #PurpleTeam | Noob
 
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 #repository          : YoussefRaafatNasry/portfolYOU     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
