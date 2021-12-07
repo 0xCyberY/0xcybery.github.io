@@ -10,7 +10,7 @@ description: More than 80 Use Cases for Splunk.
 Check for any tampering done to Windows audit logs.
 
 ```sql
-index=* (sourcetype=wineventlog AND (EventCode=1102 OR EventCode=1100)) OR (sourcetype=wineventlog AND EventCode=104)
+index=__your_sysmon_index__ (sourcetype=wineventlog AND (EventCode=1102 OR EventCode=1100)) OR (sourcetype=wineventlog AND EventCode=104)
 | stats count by _time EventCode Message sourcetype host
 ```
 
@@ -19,7 +19,7 @@ index=* (sourcetype=wineventlog AND (EventCode=1102 OR EventCode=1100)) OR (sour
 Find large file uploads that could point to data exfiltration in your network.
 
 ```sql
-index=* sourcetype=websense*
+index=__your_sysmon_index__ sourcetype=websense*
 | where bytes_out > 35000000
 | table _time src_ip bytes* uri
 ```
@@ -29,7 +29,7 @@ index=* sourcetype=websense*
 Using anti-virus logs to detect if malware is recurring on a host after being removed.
 
 ```sql
-index=* sourcetype=symantec:*
+index=__your_sysmon_index__ sourcetype=symantec:*
 | stats count range(_time) as TimeRange by Risk_Name, Computer_Name
 | where TimeRange>1800
 | eval TimeRange_In_Hours = round(TimeRange/3600,2), TimeRange_In_Days = round(TimeRange/3600/24,2)
@@ -40,7 +40,7 @@ index=* sourcetype=symantec:*
 A brute-force attack consists of a multiple login attempts using many passwords by an unauthorized user/attacker with the hope of eventually guessing the correct password.
 
 ```sql
-index=* sourcetype=winxsecurity user=* user!""
+index=__your_sysmon_index__ sourcetype=winxsecurity user=* user!""
 | stats count(eval(action="success")) as successes count(eval(action="failure")) as failures by user, ComputerName
 | where successes>0 AND failures>100
 ```
@@ -68,7 +68,7 @@ index=linux source="/var/log/auth.log" "Failed password"
 Find unencrypted web communications that could lead to a data breach.
 
 ```sql
-index=* sourcetype=firewall_data dest_port!=443 app=workday*
+index=__your_sysmon_index__ sourcetype=firewall_data dest_port!=443 app=workday*
 | table _time user app bytes* src_ip dest_ip dest_port
 ```
 
@@ -210,7 +210,7 @@ Look for distinct count of destination ports within a short span of time.
 OR
 
 ```sql
-index=* sourcetype=firewall*
+index=__your_sysmon_index__ sourcetype=firewall*
 | stats dc(dest_port) as num_dest_port dc(dest_ip) as num_dest_ip by src_ip
 | where num_dest_port >500 OR num_dest_ip >500
 ```
@@ -391,7 +391,7 @@ sourcetype='firewall_logs' dest_ip = 'internal_subnet' | stats dc(dest_port) as 
 Often, after a threat actor gains access to a system, they will attempt to run some kind of malware to further infect the victim machine. These malware often have long command line strings, which could be a possible indicator of attack. Here, we use sysmon and Splunk to first find the average command string length and search for command strings that stretch over multiple lines, thus identifying anomalies and possibly malicious commands.
 
 ```sql
-index=* sourcetype="xmlwineventlog" EventCode=4688  |eval cmd_len=len(CommandLine) | eventstats avg(cmd_len) as avg by host| stats max(cmd_len) as maxlen, values(avg) as avgperhost by host, CommandLine | where maxlen > 10*avgperhost
+index=__your_sysmon_index__ sourcetype="xmlwineventlog" EventCode=4688  |eval cmd_len=len(CommandLine) | eventstats avg(cmd_len) as avg by host| stats max(cmd_len) as maxlen, values(avg) as avgperhost by host, CommandLine | where maxlen > 10*avgperhost
 ```
 
 ### 39- Clearing Windows Logs with Wevtutil

