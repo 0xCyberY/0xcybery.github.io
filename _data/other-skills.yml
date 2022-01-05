@@ -20,7 +20,7 @@
 
 - name: Ethical Hacking 
   percentage: 95
-  color: light
+  color: danger
 
 - name: Cloud Security and Analytics 
   percentage: 70
