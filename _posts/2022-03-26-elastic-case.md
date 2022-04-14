@@ -6,14 +6,6 @@ color: warning
 description:  A malicious double-extension file sneaked into a user inbox, which led to a full network compromise . Use your SIEM analysis skills to reveal the attack details. Lots of exciting stuff powershell, bruteforce, python, and reverse shell!.
 ---
 
-## Instructions
->	This challenge is designed to work with VirtualBox and VMware. 
->	Challenge credentials: username: elastic, password: elastic
->	Elasticsearch and Kibana credentials: username: elastic, password: elastic
->	Elasticsearch works on default port 9200, example: 192.168.20.60:9200
->	Kibana works on default port 5601, example: 192.168.20.60:5601
->	Hardware Requirements: 4GB of memory and 50GB of disk space.
-
 ## Walkthrough
 
 > 	In this challenge will focus on two main sections of Elastic, Elastic Security as we are using 
