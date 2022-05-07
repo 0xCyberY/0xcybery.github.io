@@ -11,7 +11,7 @@ description:  A malicious double-extension file sneaked into a user inbox, which
 > 	In this challenge will focus on two main sections of Elastic, Elastic Security as we are using 
 >	Elastic as SIEM and Kibana for analytics.
 
-##### You can vist the challenge and download the file from the following link : [cyberdefenders.org](https://elastic-case.cyberdefenders.org/){:target="_blank" rel="noopener"}.
+##### You can vist the challenge and download the file from the following link : [cyberdefenders.org](https://cyberdefenders.org/blueteam-ctf-challenges/90){:target="_blank" rel="noopener"}.
 
 ![logo](../assets/img/elastic-case/logo.png)
 
