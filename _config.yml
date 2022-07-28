@@ -1,8 +1,7 @@
 ### Site Settings ###
 title               : CyberY
-description         : >-
-                      I write code that breaks codes | 
-                      Cyber Security | #PenTest #RedTeam #PurpleTeam | Noob
+description         : >- 
+                      CSE Student | Cyber Security Specialist | SOC Analyst L1 | Penetration Tester | Security guy in morning & Crypto guy in evening #BTC
 
 baseurl             : ""                     # Change to empty quotes if you are hosting your site at <your-username>.github.io directly
 #repository          : YoussefRaafatNasry/portfolYOU     # Change to <your-username>/<your-username>.github.io (or remove it if you don't need remote projects)
