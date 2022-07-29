@@ -10,7 +10,7 @@ description:  Using Python for alternate data streams to hide artifacts on a sys
 
 <!--ts-->
 * [Introduction](##Introduction)
-* [Create files with alternate data stream](##Create-files-with-alternate-data-stream)
+* [Create-files-with-alternate-data-stream](##Create-files-with-alternate-data-stream)
 * [Execution](##Execution)
 * [References](##References)
 
@@ -68,6 +68,8 @@ What we're going to do with these in our Python script is read the command file,
 We have malicious.exe, and so despite the fact that this particular program is hiding in an alternate data stream and it's not as easily found on the file system, this doesn't mean that we can't access this alternate data stream. All we need is the ability to properly provide its filename, similar to what we did up here with command.txt file and result.txt file. What we use is a simple "BuildADSFilename" function defined here at the top, which essentially creates the file name from the decoy file's name, so benign.txt colon and then the text file or executable that we've stored in that alternate data stream.
 
 We're going to use os.path.join We'll get something like `C:\Users\cybery\Desktop\streem\benign.txt:malicious.exe`We then can use OS system to run WMIC process called create and then provide the path to that particular executable, and what this is going do is it's going to run the executable stored within this alternate data stream.
+
+Now, let's run AlternateDataStreams.py file and absorb the output.
 
 ![image](../assets/img/Python-for-defense-evasion/3.png)
 
