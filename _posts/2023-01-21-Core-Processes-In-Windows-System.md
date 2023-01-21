@@ -198,7 +198,7 @@ This process gives the user access to their folders and files. It also provides 
 | | Outbound TCP/IP connections | 
 
 
-The Windows processes discussed in this aricle are core processes, and understanding how they usually operate can aid a defender in identifying unusual activity on the endpoint. 
+The Windows processes discussed in this article are core processes, and understanding how they usually operate can aid a defender in identifying unusual activity on the endpoint. 
 
 
 ## References
