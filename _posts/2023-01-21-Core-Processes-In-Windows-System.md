@@ -27,6 +27,8 @@ description:  This article aims to help you know and understand what normal beha
 
 This article aims to help you know and understand what normal behavior within a Windows operating system is.
 
+![image](../assets/img/Core-Processes-In-Windows-System/iamge.png)
+
 ## System
 
 The first Windows process on the list is System. We know that a PID is assigned at random to the process, but that is not the case for the System process.
