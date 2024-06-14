@@ -1,11 +1,19 @@
-- name: C
-  percentage: 85
-  color: danger
+- name: PowerShell
+  percentage: 90
+  color: primary
 
-- name: C++
-  percentage: 80
-  color:
+- name: Bash
+  percentage: 92
+  color: secondary
 
 - name: Python
-  percentage: 70
-  color: secondary
+  percentage: 85
+  color: success
+
+- name: C++
+  percentage: 73
+  color: danger
+
+- name: C
+  percentage: 65
+  color: warning
