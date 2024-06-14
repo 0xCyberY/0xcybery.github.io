@@ -1,31 +1,31 @@
-- name: Networking
-  percentage: 65
+- name: Incident Response
+  percentage: 96
   color: secondary
 
-- name: Windows & Linux Security
+- name: Digital Forensics
   percentage: 88
   color: success
 
-- name: Check Point CCSA
-  percentage: 85
+- name: Endpoint Security
+  percentage: 90
   color: danger
 
-- name: Wireshark
-  percentage: 90
+- name: Security Operations
+  percentage: 92
   color: warning
 
-- name: SIEM 
-  percentage: 75
+- name: Threat Hunting 
+  percentage: 95
   color: info
 
-- name: Ethical Hacking 
-  percentage: 95
+- name: Cyber Threat Intelligence 
+  percentage: 88
   color: danger
 
-- name: Cloud Security and Analytics 
-  percentage: 70
+- name: Technology Integration 
+  percentage: 75
   color: 
 
-- name: Cyber Forensics 
+- name: Workflow Automation 
   percentage: 80
   color: secondary
