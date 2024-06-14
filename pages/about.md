@@ -8,9 +8,13 @@ weight: 3
 # **About Me**
 
 Hi I am **{{ site.author.name }}** :wave:,<br>
-A highly dedicated professional has a Bachelor's Degree in Computer Science and Engineering, has a number of certificates in Cyber Security, a passion for conducting risk assessments, identifying/mitigating system vulnerabilities, and executing standard security measures to protect critical resources across the organization. 
+A passionate cybersecurity professional with a proven track record in safeguarding digital assets and mitigating cyber threats.
 
-Capacity to learn/devise effective solutions for safeguarding information assets, mitigating threats of misuse, and ensuring data confidentiality/integrity in compliance with established security standards and guidelines. Knowledgeable with the Kali Linux fundamentals, web application security, information/network security, anti-malware, firewalls, intrusion prevention/monitoring, web filtering, and Active Directory.
+With more than 2 years of experience in the field, I specialize in conducting cutting-edge research to identify vulnerabilities, develop innovative defense strategies, and stay ahead of cyber adversaries. My expertise spans across threat intelligence, reverse engineering, malware analysis, and penetration testing.
+
+Throughout my career, I've had the privilege of working with diverse teams and organizations, collaborating closely to address complex cybersecurity challenges and protect critical infrastructure. I thrive in dynamic environments where I can leverage my technical skills and strategic mindset to drive impactful outcomes.
+
+Beyond my professional endeavors, I'm dedicated to continuous learning and staying updated with the latest advancements in cybersecurity technologies and best practices. I'm also passionate about sharing knowledge and mentoring aspiring professionals in the field.
 
 <div class="row">
 {% include about/skills.html title="Programming Skills" source=site.data.programming-skills %}
