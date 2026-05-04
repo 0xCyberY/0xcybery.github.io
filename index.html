@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>0xCyberY | Abdullah Baghuth — Cybersecurity Engineer</title>
+  <meta name="description"
+    content="Senior Security Engineer with 5+ years of experience in security architecture, detection engineering, DFIR, and cloud security (GCP). Published CVE researcher at COGNNA, Riyadh.">
+  <meta property="og:title" content="0xCyberY | Abdullah Baghuth">
+  <meta property="og:description"
+    content="Cybersecurity Engineer specializing in threat intelligence, malware analysis, and penetration testing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://0xcybery.github.io/">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    :root {
+      --bg: #0a0a0f;
+      --bg2: #0d0d16;
+      --green: #00ff88;
+      --blue: #0088ff;
+      --purple: #8b5cf6;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --glass: rgba(255, 255, 255, 0.04);
+      --glass2: rgba(255, 255, 255, 0.08);
+      --border: rgba(255, 255, 255, 0.1);
+      --border2: rgba(255, 255, 255, 0.15);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      --radius: 20px;
+      --radius-sm: 12px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: var(--green) var(--bg2)
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Space Grotesk', sans-serif;
+      overflow-x: hidden;
+      cursor: none
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg2)
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--green);
+      border-radius: 3px
+    }
+
+    /* CURSOR */
+    #cursor {
+      position: fixed;
+      width: 12px;
+      height: 12px;
+      background: var(--green);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform .15s, background .15s;
+      box-shadow: 0 0 15px var(--green)
+    }
+
+    #cursor-ring {
+      position: fixed;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid var(--green);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: all .1s;
+      opacity: .5
+    }
+
+    /* GLASS */
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius)
+    }
+
+    .glass2 {
+      background: var(--glass2);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border: 1px solid var(--border2);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius)
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 10, 15, 0.7);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      transition: all .3s
+    }
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.3rem;
+      color: var(--green);
+      text-decoration: none;
+      font-weight: 600;
+      text-shadow: 0 0 20px rgba(0, 255, 136, .4)
+    }
+
+    .logo span {
+      color: var(--muted)
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .9rem;
+      font-weight: 500;
+      position: relative;
+      transition: color .2s;
+      letter-spacing: .03em
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--green);
+      transition: width .3s;
+      border-radius: 2px;
+      box-shadow: 0 0 8px var(--green)
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--green)
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%
+    }
+
+    #burger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px
+    }
+
+    #burger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all .3s
+    }
+
+    #mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      z-index: 1100;
+      padding: 80px 32px 40px;
+      flex-direction: column;
+      gap: 24px;
+      background: rgba(10, 10, 20, 0.97);
+      backdrop-filter: blur(32px);
+      border-left: 1px solid var(--border);
+      transition: right .35s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    #mobile-menu.open {
+      right: 0;
+      display: flex
+    }
+
+    #mobile-menu a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s
+    }
+
+    #mobile-menu a:hover {
+      color: var(--green)
+    }
+
+    #menu-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.5rem;
+      cursor: pointer
+    }
+
+    /* HERO */
+    #hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden
+    }
+
+    #canvas-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 24px
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 20px;
+      background: rgba(0, 255, 136, .08);
+      border: 1px solid rgba(0, 255, 136, .25);
+      border-radius: 100px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--green);
+      margin-bottom: 24px;
+      animation: fadeDown .8s ease both
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+      box-shadow: 0 0 8px var(--green)
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .5;
+        transform: scale(1.3)
+      }
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.08;
+      margin-bottom: 16px;
+      animation: fadeUp .9s .1s ease both
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    .hero-title {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--muted);
+      margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      animation: fadeUp .9s .2s ease both
+    }
+
+    .hero-sub {
+      font-size: clamp(.85rem, 1.8vw, 1rem);
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      line-height: 1.7;
+      animation: fadeUp .9s .3s ease both
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp .9s .4s ease both
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-weight: 600;
+      font-size: .95rem;
+      text-decoration: none;
+      transition: all .25s;
+      cursor: pointer;
+      border: none;
+      font-family: 'Space Grotesk', sans-serif
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      color: #000;
+      box-shadow: 0 4px 24px rgba(0, 255, 136, .3)
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0, 255, 136, .45)
+    }
+
+    .btn-outline {
+      background: var(--glass);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border2);
+      color: var(--text)
+    }
+
+    .btn-outline:hover {
+      border-color: var(--green);
+      color: var(--green);
+      transform: translateY(-3px);
+      box-shadow: 0 0 24px rgba(0, 255, 136, .15)
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite
+    }
+
+    @keyframes bounce {
+
+      0%,
+      100% {
+        transform: translateX(-50%) translateY(0)
+      }
+
+      50% {
+        transform: translateX(-50%) translateY(8px)
+      }
+    }
+
+    .scroll-hint::after {
+      content: '';
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(var(--green), transparent)
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 100px 0
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--green);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px
+    }
+
+    .section-label::before {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--green);
+      opacity: .5
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 56px;
+      line-height: 1.2
+    }
+
+    h2 span {
+      background: linear-gradient(135deg, var(--green), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: .97rem
+    }
+
+    .about-text p strong {
+      color: var(--text)
+    }
+
+    .socials {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 24px
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 100px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      text-decoration: none;
+      font-size: .85rem;
+      font-weight: 500;
+      transition: all .25s
+    }
+
+    .social-btn:hover {
+      border-color: var(--green);
+      color: var(--green);
+      box-shadow: 0 0 16px rgba(0, 255, 136, .15);
+      transform: translateY(-2px)
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px
+    }
+
+    .skill-pill {
+      padding: 10px 16px;
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: .82rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-align: center;
+      transition: all .25s
+    }
+
+    .skill-pill:hover {
+      border-color: var(--green);
+      color: var(--green);
+      box-shadow: 0 0 12px rgba(0, 255, 136, .12)
+    }
+
+    .about-right h3 {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      color: var(--text)
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px
+    }
+
+    .project-card {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: all .3s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      opacity: 0;
+      transition: opacity .3s
+    }
+
+    .project-card.green::before {
+      background: radial-gradient(ellipse at top left, rgba(0, 255, 136, .08), transparent 60%)
+    }
+
+    .project-card.blue::before {
+      background: radial-gradient(ellipse at top left, rgba(0, 136, 255, .08), transparent 60%)
+    }
+
+    .project-card.purple::before {
+      background: radial-gradient(ellipse at top left, rgba(139, 92, 246, .08), transparent 60%)
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px)
+    }
+
+    .project-card.green:hover {
+      box-shadow: 0 16px 48px rgba(0, 255, 136, .2), var(--shadow)
+    }
+
+    .project-card.blue:hover {
+      box-shadow: 0 16px 48px rgba(0, 136, 255, .2), var(--shadow)
+    }
+
+    .project-card.purple:hover {
+      box-shadow: 0 16px 48px rgba(139, 92, 246, .2), var(--shadow)
+    }
+
+    .project-card:hover::before {
+      opacity: 1
+    }
+
+    .project-icon {
+      font-size: 2rem;
+      margin-bottom: 16px
+    }
+
+    .project-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--text)
+    }
+
+    .project-card p {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px
+    }
+
+    .tag {
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: .72rem;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .tag-green {
+      background: rgba(0, 255, 136, .1);
+      color: var(--green);
+      border: 1px solid rgba(0, 255, 136, .2)
+    }
+
+    .tag-blue {
+      background: rgba(0, 136, 255, .1);
+      color: var(--blue);
+      border: 1px solid rgba(0, 136, 255, .2)
+    }
+
+    .tag-purple {
+      background: rgba(139, 92, 246, .1);
+      color: var(--purple);
+      border: 1px solid rgba(139, 92, 246, .2)
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--green);
+      font-size: .85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: gap .2s
+    }
+
+    .project-link:hover {
+      gap: 10px
+    }
+
+    /* CERTS */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px
+    }
+
+    .cert-card {
+      height: 200px;
+      perspective: 1000px;
+      cursor: pointer
+    }
+
+    .cert-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform .6s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .cert-card:hover .cert-inner {
+      transform: rotateY(180deg)
+    }
+
+    .cert-front,
+    .cert-back {
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(20px)
+    }
+
+    .cert-front {
+      background: var(--glass)
+    }
+
+    .cert-back {
+      background: var(--glass2);
+      transform: rotateY(180deg)
+    }
+
+    .cert-status {
+      font-size: .75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+      display: inline-block;
+      width: fit-content
+    }
+
+    .status-done {
+      background: rgba(0, 255, 136, .1);
+      color: var(--green);
+      border: 1px solid rgba(0, 255, 136, .2)
+    }
+
+    .status-wip {
+      background: rgba(139, 92, 246, .1);
+      color: var(--purple);
+      border: 1px solid rgba(139, 92, 246, .2)
+    }
+
+    .cert-front h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text)
+    }
+
+    .cert-front p {
+      font-size: .8rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace
+    }
+
+    .cert-back h3 {
+      font-size: .95rem;
+      font-weight: 600;
+      color: var(--text)
+    }
+
+    .cert-back p {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .cert-back a {
+      color: var(--green);
+      font-size: .8rem;
+      text-decoration: none;
+      font-weight: 500
+    }
+
+    .cert-back a:hover {
+      text-decoration: underline
+    }
+
+    /* BLOG */
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px
+    }
+
+    .blog-card {
+      padding: 28px;
+      border-radius: var(--radius);
+      background: var(--glass);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      transition: all .3s;
+      text-decoration: none;
+      color: inherit;
+      display: block
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--blue);
+      box-shadow: 0 16px 48px rgba(0, 136, 255, .15), var(--shadow)
+    }
+
+    .blog-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .75rem;
+      color: var(--blue);
+      margin-bottom: 12px
+    }
+
+    .blog-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      line-height: 1.5;
+      color: var(--text)
+    }
+
+    .blog-card p {
+      font-size: .83rem;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .blog-card .read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--blue);
+      font-size: .82rem;
+      font-weight: 600;
+      margin-top: 16px;
+      transition: gap .2s
+    }
+
+    .blog-card:hover .read-more {
+      gap: 10px
+    }
+
+    /* CONTACT */
+    .contact-wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center
+    }
+
+    .contact-card {
+      padding: 48px;
+      border-radius: var(--radius);
+      background: var(--glass);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow)
+    }
+
+    .contact-card p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 32px;
+      font-size: .97rem
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px
+    }
+
+    .contact-email {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .9rem;
+      color: var(--green);
+      padding: 14px 28px;
+      border: 1px solid rgba(0, 255, 136, .3);
+      border-radius: 100px;
+      background: rgba(0, 255, 136, .05);
+      display: inline-block;
+      transition: all .25s;
+      text-decoration: none
+    }
+
+    .contact-email:hover {
+      background: rgba(0, 255, 136, .1);
+      box-shadow: 0 0 24px rgba(0, 255, 136, .2)
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: .85rem
+    }
+
+    footer span {
+      color: var(--green)
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all .7s cubic-bezier(.4, 0, .2, 1)
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0)
+    }
+
+    /* TERMINAL ACCENT */
+    .terminal-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+      color: var(--green);
+      opacity: .6;
+      display: block;
+      margin-bottom: 4px
+    }
+
+    @media(max-width:900px) {
+
+      .projects-grid,
+      .certs-grid,
+      .blog-grid {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr
+      }
+
+      .nav-links {
+        display: none
+      }
+
+      #burger {
+        display: flex
+      }
+    }
+
+    @media(max-width:600px) {
+
+      .projects-grid,
+      .certs-grid,
+      .blog-grid {
+        grid-template-columns: 1fr
+      }
+
+      nav {
+        padding: 14px 20px
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        align-items: center
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="cursor"></div>
+  <div id="cursor-ring"></div>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="logo" href="#hero"><span>&lt;</span>0xCyberY<span>/&gt;</span></a>
+    <ul class="nav-links">
+      <li><a href="#hero">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#blog">Blog</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div id="burger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </nav>
+  <div id="mobile-menu">
+    <button id="menu-close" onclick="toggleMenu()">✕</button>
+    <a href="#hero" onclick="toggleMenu()">Home</a>
+    <a href="#about" onclick="toggleMenu()">About</a>
+    <a href="#projects" onclick="toggleMenu()">Projects</a>
+    <a href="#certifications" onclick="toggleMenu()">Certifications</a>
+    <a href="#blog" onclick="toggleMenu()">Blog</a>
+    <a href="#contact" onclick="toggleMenu()">Contact</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <canvas id="canvas-bg"></canvas>
+    <div class="hero-content">
+      <div class="hero-badge">🟢 Available for Security Engagements</div>
+      <h1>Abdullah <span>Baghuth</span></h1>
+      <p class="hero-title">// Senior Security Engineer @ COGNNA · Riyadh, SA</p>
+      <p class="hero-sub">Security Architecture · Detection Engineering · DFIR · Cloud Security (GCP) · Published CVE
+        Researcher</p>
+      <div class="hero-btns">
+        <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <a href="#contact" class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+    <div class="scroll-hint">scroll</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="section-label">01 — About</div>
+      <h2>Who I <span>Am</span></h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>Senior Security Engineer with <strong>5+ years of experience</strong> across security architecture,
+            detection engineering, and digital forensics &amp; incident response (DFIR). I specialize in securing
+            enterprise and cloud environments on <strong>GCP</strong>, optimising EDR stacks, and engineering detection
+            coverage in <strong>Google SecOps (Chronicle)</strong>.</p>
+          <p>At <strong>COGNNA (Riyadh)</strong> I lead security architecture design, build SIEM detection rules and
+            dashboards, automate workflows with n8n, and manage the full incident lifecycle — from compromise assessment
+            to remediation tracking. I have also published <strong>three critical CVEs</strong> (CVE-2022-2921,
+            CVE-2022-2927, CVE-2022-2888) through responsible disclosure on Huntr.dev.</p>
+          <p>A strong believer in the power of open knowledge — every CVE report, blog writeup, and open-source tool is
+            my contribution back to the community that shaped me.</p>
+          <div class="socials">
+            <a class="social-btn" href="https://github.com/0xCyberY" target="_blank">⚡ GitHub</a>
+            <a class="social-btn" href="https://www.linkedin.com/in/abdullah-baghuth/" target="_blank">💼 LinkedIn</a>
+            <a class="social-btn" href="https://twitter.com/0xCyberY" target="_blank">🐦 Twitter</a>
+            <a class="social-btn" href="https://0xcybery.github.io/blog/" target="_blank">📝 Blog</a>
+          </div>
+        </div>
+        <div class="about-right reveal">
+          <h3>🛡️ Core Competencies</h3>
+          <div class="skills-grid">
+            <div class="skill-pill">Cloud Security (GCP)</div>
+            <div class="skill-pill">Security Architecture</div>
+            <div class="skill-pill">Google SecOps / Chronicle</div>
+            <div class="skill-pill">DFIR &amp; Velociraptor</div>
+            <div class="skill-pill">Threat Detection &amp; Hunting</div>
+            <div class="skill-pill">EDR Management</div>
+            <div class="skill-pill">MITRE ATT&amp;CK</div>
+            <div class="skill-pill">Python / PowerShell / Bash</div>
+            <div class="skill-pill">DevSecOps &amp; CI/CD</div>
+            <div class="skill-pill">Vuln. Management</div>
+            <div class="skill-pill">Security Automation (n8n)</div>
+            <div class="skill-pill">CVE Research</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="section-label">02 — Projects</div>
+      <h2>Featured <span>Work</span></h2>
+      <div class="projects-grid">
+        <div class="project-card green reveal">
+          <div class="project-icon">🔐</div>
+          <h3>Ethical Hacking Toolkit (EHTK)</h3>
+          <p>A comprehensive open-source collection of tools, cheat sheets, and resources for ethical hackers and
+            penetration testers. Covers CEH, OSCP, eCPPT, and PNPT frameworks — battle-tested in real engagements.</p>
+          <div class="tags">
+            <span class="tag tag-green">#PenetrationTesting</span>
+            <span class="tag tag-green">#OSCP</span>
+            <span class="tag tag-green">#OpenSource</span>
+          </div>
+          <a href="https://0xcybery.github.io/ehtk/" target="_blank" class="project-link">View Project →</a>
+        </div>
+        <div class="project-card blue reveal">
+          <div class="project-icon">🐧</div>
+          <h3>Linux Commands Reference</h3>
+          <p>A curated, practical guide to the most essential Linux commands for security professionals and system
+            administrators — battle-tested in real pentesting engagements and designed for rapid field reference.</p>
+          <div class="tags">
+            <span class="tag tag-blue">#Linux</span>
+            <span class="tag tag-blue">#Sysadmin</span>
+            <span class="tag tag-blue">#CLI</span>
+          </div>
+          <a href="https://github.com/0xCyberY/Linux-Commands" target="_blank" class="project-link">View Project →</a>
+        </div>
+        <div class="project-card purple reveal">
+          <div class="project-icon">📊</div>
+          <h3>Elastic-Case BlueTeam Challenge</h3>
+          <p>Published SOC/Blue Team challenge on CyberDefenders using the ELK stack. Helps defenders practice
+            real-world incident response, log analysis, and threat hunting scenarios in a safe environment.</p>
+          <div class="tags">
+            <span class="tag tag-purple">#BlueTeam</span>
+            <span class="tag tag-purple">#SIEM</span>
+            <span class="tag tag-purple">#SOC</span>
+          </div>
+          <a href="https://cyberdefenders.org" target="_blank" class="project-link">View Project →</a>
+        </div>
+        <div class="project-card green reveal">
+          <div class="project-icon">🗺️</div>
+          <h3>MITRE ATT&CK Research & Tooling</h3>
+          <p>Active research and contributions to MITRE ATT&CK-aligned tooling and threat modeling. Uses Mitre-Assistant
+            to map adversary TTPs, build detection strategies, and validate security controls.</p>
+          <div class="tags">
+            <span class="tag tag-green">#MitreATTCK</span>
+            <span class="tag tag-green">#ThreatIntel</span>
+            <span class="tag tag-green">#PurpleTeam</span>
+          </div>
+          <a href="https://github.com/0xCyberY" target="_blank" class="project-link">View Research →</a>
+        </div>
+        <div class="project-card blue reveal">
+          <div class="project-icon">✍️</div>
+          <h3>Cybersecurity Blog</h3>
+          <p>Technical writeups covering malware analysis, Windows internals, DFIR techniques, CTF walkthroughs, and
+            adversary simulation — all freely shared with the community to advance collective knowledge.</p>
+          <div class="tags">
+            <span class="tag tag-blue">#Blogging</span>
+            <span class="tag tag-blue">#CTF</span>
+            <span class="tag tag-blue">#DFIR</span>
+          </div>
+          <a href="https://0xcybery.github.io/blog/" target="_blank" class="project-link">Read Blog →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="container">
+      <div class="section-label">03 — Credentials</div>
+      <h2>Certifications & <span>Achievements</span></h2>
+      <div class="certs-grid">
+        <div class="cert-card reveal">
+          <div class="cert-inner">
+            <div class="cert-front">
+              <span class="cert-status status-done">✅ Certified</span>
+              <h3>Google Cloud Security</h3>
+              <p>Professional Cloud Security Engineer</p>
+            </div>
+            <div class="cert-back">
+              <h3>Google PCSE</h3>
+              <p>Validates expertise in designing and implementing secure infrastructure on GCP — IAM, data protection,
+                network security, and governance controls.</p>
+              <a href="https://www.linkedin.com/in/abdullah-baghuth/" target="_blank">Verify Credential →</a>
+            </div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-inner">
+            <div class="cert-front">
+              <span class="cert-status status-done">✅ Certified</span>
+              <h3>Google SecOps Engineer</h3>
+              <p>Professional Security Operations Engineer</p>
+            </div>
+            <div class="cert-back">
+              <h3>Google PSOE</h3>
+              <p>Validates expertise in security operations, threat detection, Chronicle SIEM, and building
+                detection-as-code pipelines in Google SecOps.</p>
+              <a href="https://www.linkedin.com/in/abdullah-baghuth/" target="_blank">Verify Credential →</a>
+            </div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-inner">
+            <div class="cert-front">
+              <span class="cert-status status-done">✅ Certified</span>
+              <h3>CCD</h3>
+              <p>Certified CyberDefender — CyberDefenders</p>
+            </div>
+            <div class="cert-back">
+              <h3>Certified CyberDefender</h3>
+              <p>Demonstrates Blue Team skills in threat hunting, SOC operations, log analysis, and incident response
+                across real-world scenarios.</p>
+              <a href="https://cyberdefenders.org" target="_blank">View Platform →</a>
+            </div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-inner">
+            <div class="cert-front">
+              <span class="cert-status status-done">✅ Certified</span>
+              <h3>CEH v11</h3>
+              <p>Certified Ethical Hacker — EC-Council</p>
+            </div>
+            <div class="cert-back">
+              <h3>CEH v11</h3>
+              <p>Covers all 20 ethical hacking domains — from footprinting and network scanning to malware analysis and
+                social engineering.</p>
+              <a href="https://www.linkedin.com/in/abdullah-baghuth/" target="_blank">Verify Credential →</a>
+            </div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-inner">
+            <div class="cert-front">
+              <span class="cert-status status-done">✅ Published</span>
+              <h3>CVE Researcher</h3>
+              <p>Huntr.dev · 3 Critical CVEs</p>
+            </div>
+            <div class="cert-back">
+              <h3>CVE-2022-2921 · 2927 · 2888</h3>
+              <p>Published three critical CVEs through responsible disclosure on Huntr.dev. Collaborated with
+                development teams to guide mitigation strategies.</p>
+              <a href="https://www.linkedin.com/in/abdullah-baghuth/" target="_blank">View Profile →</a>
+            </div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-inner">
+            <div class="cert-front">
+              <span class="cert-status status-done">✅ Author</span>
+              <h3>CyberDefenders</h3>
+              <p>Blue Team Challenge Author &amp; CCD</p>
+            </div>
+            <div class="cert-back">
+              <h3>CyberDefenders Contributor</h3>
+              <p>Published the Elastic-Case Blue Team challenge using ELK stack. Helps SOC analysts practice real-world
+                incident response and log analysis.</p>
+              <a href="https://cyberdefenders.org" target="_blank">View Challenge →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p style="text-align:center;margin-top:32px;color:var(--muted);font-size:.85rem">🔗 For verified credentials visit
+        <a href="https://www.linkedin.com/in/abdullah-baghuth/" target="_blank"
+          style="color:var(--green)">linkedin.com/in/abdullah-baghuth</a></p>
+    </div>
+  </section>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="container">
+      <div class="section-label">04 — Knowledge</div>
+      <h2>Latest <span>Writeups</span></h2>
+      <div class="blog-grid">
+        <a class="blog-card reveal" href="https://0xcybery.github.io/blog/" target="_blank">
+          <div class="blog-meta">Malware Analysis · DFIR</div>
+          <h3>Dissecting Modern Malware: Windows Internals & Evasion Techniques</h3>
+          <p>A deep-dive into how modern malware abuses Windows APIs, process injection, and LOLBins to evade detection
+            and establish persistence.</p>
+          <span class="read-more">Read More →</span>
+        </a>
+        <a class="blog-card reveal" href="https://0xcybery.github.io/blog/" target="_blank">
+          <div class="blog-meta">CTF Walkthrough · Web</div>
+          <h3>CTF Walkthrough: Chaining Logic Flaws to RCE</h3>
+          <p>Step-by-step walkthrough of a complex CTF challenge combining SSRF, SSTI, and privilege escalation to
+            achieve full remote code execution.</p>
+          <span class="read-more">Read More →</span>
+        </a>
+        <a class="blog-card reveal" href="https://0xcybery.github.io/blog/" target="_blank">
+          <div class="blog-meta">Purple Teaming · SIEM</div>
+          <h3>Building Detection Rules with MITRE ATT&CK & ELK Stack</h3>
+          <p>How to operationalize the MITRE ATT&CK framework into actionable detection rules in Elasticsearch, tested
+            against real adversary TTPs.</p>
+          <span class="read-more">Read More →</span>
+        </a>
+      </div>
+      <div style="text-align:center;margin-top:40px">
+        <a href="https://0xcybery.github.io/blog/" target="_blank" class="btn btn-outline">View All Posts →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-label">05 — Get In Touch</div>
+      <h2>Let's <span>Connect</span></h2>
+      <div class="contact-wrap">
+        <div class="contact-card reveal">
+          <span class="terminal-line">$ whoami --contact</span>
+          <p>Whether you're looking for a penetration tester, want to collaborate on security research, or just want to
+            talk about the latest threat landscape — my inbox is always open.</p>
+          <a href="mailto:abdullahsalem7737@gmail.com" class="contact-email">📧 abdullahsalem7737@gmail.com</a>
+          <div class="contact-links" style="margin-top:24px">
+            <a href="https://www.linkedin.com/in/abdullah-baghuth/" target="_blank" class="btn btn-outline">💼
+              LinkedIn</a>
+            <a href="https://github.com/0xCyberY" target="_blank" class="btn btn-outline">⚡ GitHub</a>
+            <a href="https://twitter.com/0xCyberY" target="_blank" class="btn btn-outline">🐦 Twitter</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>© 2025 <span>Abdullah Baghuth</span> · 0xCyberY · Built with ❤️</p>
+      <p style="margin-top:8px">Riyadh, Saudi Arabia &nbsp;·&nbsp; <a href="https://github.com/0xCyberY" target="_blank"
+          style="color:var(--green);text-decoration:none">GitHub</a> &nbsp;·&nbsp; <a
+          href="https://www.linkedin.com/in/abdullah-baghuth/" target="_blank"
+          style="color:var(--green);text-decoration:none">LinkedIn</a></p>
+    </div>
+  </footer>
+  <script>
+    // CURSOR
+    const cur = document.getElementById('cursor'), ring = document.getElementById('cursor-ring');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
+    function animRing() { rx += (mx - rx) * .12; ry += (my - ry) * .12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(animRing) }
+    animRing();
+    document.querySelectorAll('a,button,.cert-card,.project-card').forEach(el => {
+      el.addEventListener('mouseenter', () => { cur.style.transform = 'translate(-50%,-50%) scale(2)'; ring.style.transform = 'translate(-50%,-50%) scale(1.5)' });
+      el.addEventListener('mouseleave', () => { cur.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.transform = 'translate(-50%,-50%) scale(1)' });
+    });
+
+    // MOBILE MENU
+    function toggleMenu() { document.getElementById('mobile-menu').classList.toggle('open') }
+
+    // THREE.JS PARTICLES
+    (function () {
+      const canvas = document.getElementById('canvas-bg');
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.z = 80;
+
+      // Particles
+      const N = 2000;
+      const geo = new THREE.BufferGeometry();
+      const pos = new Float32Array(N * 3), col = new Float32Array(N * 3);
+      const colors = [[0, 1, .53], [0, .53, 1], [.54, .36, .96]];
+      for (let i = 0; i < N; i++) {
+        pos[i * 3] = (Math.random() - .5) * 200;
+        pos[i * 3 + 1] = (Math.random() - .5) * 200;
+        pos[i * 3 + 2] = (Math.random() - .5) * 200;
+        const c = colors[Math.floor(Math.random() * 3)];
+        col[i * 3] = c[0]; col[i * 3 + 1] = c[1]; col[i * 3 + 2] = c[2];
+      }
+      geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+      geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+      const mat = new THREE.PointsMaterial({ size: .6, vertexColors: true, transparent: true, opacity: .75 });
+      scene.add(new THREE.Points(geo, mat));
+
+      // Lines network
+      const lineGeo = new THREE.BufferGeometry();
+      const linePos = [];
+      const nodes = [];
+      for (let i = 0; i < 80; i++) nodes.push({ x: (Math.random() - .5) * 160, y: (Math.random() - .5) * 160, z: (Math.random() - .5) * 60 });
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, dz = nodes[i].z - nodes[j].z;
+          if (Math.sqrt(dx * dx + dy * dy + dz * dz) < 35) {
+            linePos.push(nodes[i].x, nodes[i].y, nodes[i].z, nodes[j].x, nodes[j].y, nodes[j].z);
+          }
+        }
+      }
+      lineGeo.setAttribute('position', new THREE.BufferAttribute(new Float32Array(linePos), 3));
+      const lineMat = new THREE.LineBasicMaterial({ color: 0x00ff88, transparent: true, opacity: .08 });
+      scene.add(new THREE.LineSegments(lineGeo, lineMat));
+
+      let t = 0;
+      function animate() { requestAnimationFrame(animate); t += .001; scene.rotation.y = t * .3; scene.rotation.x = t * .1; renderer.render(scene, camera) }
+      animate();
+      window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight) });
+    })();
+
+    // SCROLL REVEAL
+    const observer = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }) }, { threshold: .1, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ACTIVE NAV
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    const ioNav = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const l = document.querySelector('.nav-links a[href="#' + e.target.id + '"]');
+          if (l) l.classList.add('active');
+        }
+      });
+    }, { threshold: .4 });
+    sections.forEach(s => ioNav.observe(s));
+  </script>
+</body>
+
+</html>
